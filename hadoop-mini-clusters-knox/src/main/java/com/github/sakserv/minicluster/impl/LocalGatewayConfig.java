@@ -510,7 +510,6 @@ public class LocalGatewayConfig extends Configuration implements GatewayConfig {
         return Collections.unmodifiableMap(result);
     }
 
-    @Override
     public boolean isClientAuthWanted() {
         return Boolean.parseBoolean(getVar(CLIENT_AUTH_WANTED, "false"));
     }
