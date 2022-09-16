@@ -51,7 +51,7 @@ import com.github.sakserv.minicluster.yarn.util.EnvironmentUtils;
 import com.github.sakserv.minicluster.yarn.util.ExecJavaCliParser;
 import com.github.sakserv.minicluster.yarn.util.ExecShellCliParser;
 import org.apache.hadoop.yarn.server.nodemanager.executor.ContainerStartContext;
-
+import org.apache.hadoop.yarn.exceptions.ConfigurationException;
 /**
  * !!!!! FOR TESTING WITH MINI CLUSTER ONLY !!!!!
  *
@@ -90,7 +90,7 @@ public class InJvmContainerExecutor extends DefaultContainerExecutor {
    * satisfied. The actual launch will be performed by invoking
    * {@link #doLaunch(Container, Path)} method.
    */
-  public int launchContainer(ContainerStartContext containerStartContext) throws IOException {
+  public int launchContainer(ContainerStartContext containerStartContext) throws IOException,ConfigurationException {
     Container container = containerStartContext.getContainer();
     Path containerWorkDir = containerStartContext.getContainerWorkDir();
     super.launchContainer(containerStartContext);
@@ -136,7 +136,7 @@ public class InJvmContainerExecutor extends DefaultContainerExecutor {
     public int launchContainer(Container container,
                                Path nmPrivateContainerScriptPath, Path nmPrivateTokensPath,
                                String userName, String appId, Path containerWorkDir,
-                               List<String> localDirs, List<String> logDirs) throws IOException {
+                               List<String> localDirs, List<String> logDirs) throws IOException,ConfigurationException {
       ContainerStartContext containerStartContext = new ContainerStartContext
           .Builder().setContainer(container)
           .setLocalizedResources(container.getLocalizedResources())
